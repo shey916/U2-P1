@@ -1,40 +1,40 @@
 ﻿using System;
 
-namespace PracticaRecursividad
+namespace PracticeR
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int opcion = 0;
+            int op = 0;
 
             do
             {
                 // --- DIBUJO DEL MENÚ ---
                 Console.Clear(); // Limpia la pantalla para que se vea ordenado
                 Console.WriteLine("========================================");
-                Console.WriteLine("   PROGRAMA 1: ALGORITMOS RECURSIVOS");
+                Console.WriteLine("   PROGRAM 1: RECURSIVE ALGORITHMS");
                 Console.WriteLine("========================================");
-                Console.WriteLine("1. Calcular Factorial (n!)");
-                Console.WriteLine("2. Sumatoria de Números Naturales (1..n)");
-                Console.WriteLine("3. Calcular Potencia (base ^ exponente)");
-                Console.WriteLine("4. Salir");
+                Console.WriteLine("1. Calculate Factorial (n!)");
+                Console.WriteLine("2. Summation of Natural Numbers (1..n)");
+                Console.WriteLine("3. Calculate Power (base ^ exponent)");
+                Console.WriteLine("4. Exit");
                 Console.WriteLine("========================================");
-                Console.Write("Selecciona una opción: ");
+                Console.Write("Select an option: ");
 
-                // Lectura de la opción
-                string entrada = Console.ReadLine();
+                // Read option
+                string input = Console.ReadLine();
 
-                // Validación básica de entrada
-                if (!int.TryParse(entrada, out opcion))
+                // Basic input validation
+                if (!int.TryParse(input, out op))
                 {
-                    opcion = 0; // Si no es número, forzamos opción inválida
+                    op = 0; 
                 }
 
-                Console.WriteLine(); // Salto de línea estético
+                Console.WriteLine(); 
 
-                // --- LÓGICA DE SELECCIÓN ---
-                switch (opcion)
+                // --- SELECTION LOGIC ---
+                switch (op)
                 {
                     case 1:
                         EjecutarCasoFactorial();
@@ -46,98 +46,97 @@ namespace PracticaRecursividad
                         EjecutarCasoPotencia();
                         break;
                     case 4:
-                        Console.WriteLine("Finalizando el programa. ¡Hasta luego!");
+                        Console.WriteLine("Ending program.");
                         break;
                     default:
-                        Console.WriteLine("Opción no válida. Por favor intenta de nuevo.");
+                        Console.WriteLine("Invalid option");
                         break;
                 }
 
-                // Pausa antes de limpiar pantalla (excepto si sale)
-                if (opcion != 4)
+                if (op != 4)
                 {
-                    Console.WriteLine("\nPresiona cualquier tecla para volver al menú...");
+                    Console.WriteLine("\nPress any key to return to the menu..");
                     Console.ReadKey();
                 }
 
-            } while (opcion != 4);
+            } while (op != 4);
         }
 
         static void EjecutarCasoFactorial()
         {
-            Console.Write("Ingresa un número entero positivo para calcular su factorial: ");
+            Console.Write("Enter a positive integer to calculate its factorial: ");
             if (int.TryParse(Console.ReadLine(), out int n) && n >= 0)
             {
-                long resultado = FactorialRecursivo(n);
-                Console.WriteLine($"\nEl Factorial de {n} es: {resultado}");
+                long result = FactorialRecursivo(n);
+                Console.WriteLine($"\nThe factorial {n} is: {result}");
             }
             else
             {
-                Console.WriteLine("Error: Debes ingresar un número entero positivo.");
+                Console.WriteLine("Error: Only positive number");
             }
         }
 
         static void EjecutarCasoSuma()
         {
-            Console.Write("Ingresa un número (n) para sumar desde n hasta 1: ");
+            Console.Write("Enter a number (n) to sum from n down to 1:");
             if (int.TryParse(Console.ReadLine(), out int n) && n >= 0)
             {
-                int resultado = SumaRecursiva(n);
-                Console.WriteLine($"\nLa sumatoria de 1 hasta {n} es: {resultado}");
+                int result = SumaRecursiva(n);
+                Console.WriteLine($"\nThe summation from 1 to {n} is: {result}");
             }
             else
             {
-                Console.WriteLine("Error: Debes ingresar un número entero positivo.");
+                Console.WriteLine("Error: You must enter a positive integer.");
             }
         }
 
         static void EjecutarCasoPotencia()
         {
-            Console.Write("Ingresa la base: ");
+            Console.Write("Enter the base: ");
             bool baseOk = int.TryParse(Console.ReadLine(), out int baseNum);
 
-            Console.Write("Ingresa el exponente (positivo): ");
+            Console.Write("Enter the exponent (positive): ");
             bool expOk = int.TryParse(Console.ReadLine(), out int exp);
 
             if (baseOk && expOk && exp >= 0)
             {
-                long resultado = PotenciaRecursiva(baseNum, exp);
-                Console.WriteLine($"\n{baseNum} elevado a la {exp} es: {resultado}");
+                long result = PotenciaRecursiva(baseNum, exp);
+                Console.WriteLine($"\n{baseNum}raised to the power of {exp} is: {result}");
             }
             else
             {
-                Console.WriteLine("Error: Revisa que los números sean enteros y el exponente positivo.");
+                Console.WriteLine("Error: Check that the numbers are integers and the exponent is positive.");
             }
         }
 
         // ---------------------------------------------------------
-        // LÓGICA RECURSIVA PURA (LOS ALGORITMOS)
+        // PURE RECURSIVE LOGIC (THE ALGORITHMS)
         // ---------------------------------------------------------
 
         // 1. FACTORIAL
         static long FactorialRecursivo(int n)
         {
-            // Condición de Salida
+            // Base Case - Exit condition
             if (n == 0 || n == 1) return 1;
-            // Segmento Recursivo
+            // Recursive Step
             return n * FactorialRecursivo(n - 1);
         }
 
-        // 2. SUMATORIA
+        // 2. SUMMATION
         static int SumaRecursiva(int n)
         {
-            // Condición de Salida
+            // Base Case - Exit condition
             if (n == 0) return 0;
-            // Segmento Recursivo
+            // Recursive Step
             return n + SumaRecursiva(n - 1);
         }
 
-        // 3. POTENCIA
+        // 3. POWER
         static long PotenciaRecursiva(int baseNum, int exp)
         {
-            // Condición de Salida
+            // Base Case - Exit condition
             if (exp == 0) return 1;
-            // Segmento Recursivo
+            // Recursive Step
             return baseNum * PotenciaRecursiva(baseNum, exp - 1);
         }
     }
