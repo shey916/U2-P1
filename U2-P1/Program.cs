@@ -6,12 +6,12 @@ namespace PracticeR
     {
         static void Main(string[] args)
         {
-            int op = 0;
+            int option = 0;
 
             do
             {
-                // --- DIBUJO DEL MENÚ ---
-                Console.Clear(); // Limpia la pantalla para que se vea ordenado
+                // --- MENU DISPLAY ---
+                Console.Clear(); // Clears the screen to keep it organized
                 Console.WriteLine("========================================");
                 Console.WriteLine("   PROGRAM 1: RECURSIVE ALGORITHMS");
                 Console.WriteLine("========================================");
@@ -26,24 +26,24 @@ namespace PracticeR
                 string input = Console.ReadLine();
 
                 // Basic input validation
-                if (!int.TryParse(input, out op))
+                if (!int.TryParse(input, out option))
                 {
-                    op = 0; 
+                    option = 0;
                 }
 
-                Console.WriteLine(); 
+                Console.WriteLine();
 
                 // --- SELECTION LOGIC ---
-                switch (op)
+                switch (option)
                 {
                     case 1:
-                        EjecutarCasoFactorial();
+                        ExecuteFactorialCase();
                         break;
                     case 2:
-                        EjecutarCasoSuma();
+                        ExecuteSumCase();
                         break;
                     case 3:
-                        EjecutarCasoPotencia();
+                        ExecutePowerCase();
                         break;
                     case 4:
                         Console.WriteLine("Ending program.");
@@ -53,35 +53,35 @@ namespace PracticeR
                         break;
                 }
 
-                if (op != 4)
+                if (option != 4)
                 {
                     Console.WriteLine("\nPress any key to return to the menu..");
                     Console.ReadKey();
                 }
 
-            } while (op != 4);
+            } while (option != 4);
         }
 
-        static void EjecutarCasoFactorial()
+        static void ExecuteFactorialCase()
         {
             Console.Write("Enter a positive integer to calculate its factorial: ");
             if (int.TryParse(Console.ReadLine(), out int n) && n >= 0)
             {
-                long result = FactorialRecursivo(n);
-                Console.WriteLine($"\nThe factorial {n} is: {result}");
+                long result = RecursiveFactorial(n);
+                Console.WriteLine($"\nThe factorial of {n} is: {result}");
             }
             else
             {
-                Console.WriteLine("Error: Only positive number");
+                Console.WriteLine("Error: Only positive numbers allowed.");
             }
         }
 
-        static void EjecutarCasoSuma()
+        static void ExecuteSumCase()
         {
-            Console.Write("Enter a number (n) to sum from n down to 1:");
+            Console.Write("Enter a number (n) to sum from n down to 1: ");
             if (int.TryParse(Console.ReadLine(), out int n) && n >= 0)
             {
-                int result = SumaRecursiva(n);
+                int result = RecursiveSum(n);
                 Console.WriteLine($"\nThe summation from 1 to {n} is: {result}");
             }
             else
@@ -90,7 +90,7 @@ namespace PracticeR
             }
         }
 
-        static void EjecutarCasoPotencia()
+        static void ExecutePowerCase()
         {
             Console.Write("Enter the base: ");
             bool baseOk = int.TryParse(Console.ReadLine(), out int baseNum);
@@ -100,8 +100,8 @@ namespace PracticeR
 
             if (baseOk && expOk && exp >= 0)
             {
-                long result = PotenciaRecursiva(baseNum, exp);
-                Console.WriteLine($"\n{baseNum}raised to the power of {exp} is: {result}");
+                long result = RecursivePower(baseNum, exp);
+                Console.WriteLine($"\n{baseNum} raised to the power of {exp} is: {result}");
             }
             else
             {
@@ -114,30 +114,30 @@ namespace PracticeR
         // ---------------------------------------------------------
 
         // 1. FACTORIAL
-        static long FactorialRecursivo(int n)
+        static long RecursiveFactorial(int n)
         {
             // Base Case - Exit condition
             if (n == 0 || n == 1) return 1;
             // Recursive Step
-            return n * FactorialRecursivo(n - 1);
+            return n * RecursiveFactorial(n - 1);
         }
 
         // 2. SUMMATION
-        static int SumaRecursiva(int n)
+        static int RecursiveSum(int n)
         {
             // Base Case - Exit condition
             if (n == 0) return 0;
             // Recursive Step
-            return n + SumaRecursiva(n - 1);
+            return n + RecursiveSum(n - 1);
         }
 
         // 3. POWER
-        static long PotenciaRecursiva(int baseNum, int exp)
+        static long RecursivePower(int baseNum, int exp)
         {
             // Base Case - Exit condition
             if (exp == 0) return 1;
             // Recursive Step
-            return baseNum * PotenciaRecursiva(baseNum, exp - 1);
+            return baseNum * RecursivePower(baseNum, exp - 1);
         }
     }
 }
